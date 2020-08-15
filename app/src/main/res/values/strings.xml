@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">FitMe</string>
     <string name="logo">FM</string>
+    <string name="bustSize">Bust Size:</string>
+    <string name="waistSize">Waist Size:</string>
+    <string name="hipSize">Hip Size:</string>
+    <string name="mainMeasurement">\'\'</string>
+    <string name="subMeasurement">Inch</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>
