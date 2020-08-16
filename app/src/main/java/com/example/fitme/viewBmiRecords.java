@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class viewBmiRecords extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class viewBmiRecords extends AppCompatActivity {
     public void calculateNewBmi(View view)
     {
         Intent intent = new Intent(this, addBmiRecord.class);
+        Toast.makeText(this, "Opening BMI Calculator", Toast.LENGTH_SHORT).show(); //toast describing user action of calculating new
         startActivity(intent);
     }
 
@@ -25,6 +27,7 @@ public class viewBmiRecords extends AppCompatActivity {
     public void backToMainPage(View view)
     {
         Intent intent = new Intent(this, viewBmiRecords.class);
+        Toast.makeText(this, "Opening Homepage", Toast.LENGTH_SHORT).show(); //toast describing user action of moving back to the homepage
         startActivity(intent);
     }
 
@@ -32,6 +35,7 @@ public class viewBmiRecords extends AppCompatActivity {
     public void updateBmi(View view)
     {
         Intent intent = new Intent(this, updateBmiRecord.class);
+        Toast.makeText(this, "Opening Update View", Toast.LENGTH_SHORT).show(); //toast describing user action of proceed to update
         startActivity(intent);
     }
 
@@ -39,6 +43,7 @@ public class viewBmiRecords extends AppCompatActivity {
     public void deleteBmi(View view)
     {
         Intent intent = new Intent(this, viewBmiRecords.class);
+        Toast.makeText(this, "Deleting Record from History", Toast.LENGTH_SHORT).show(); //toast describing user action of delete
         startActivity(intent);
     }
 }

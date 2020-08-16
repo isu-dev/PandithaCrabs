@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".addBmiRecord">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.90"
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </RelativeLayout>
+
     <TableRow
     android:id="@+id/tableRow"
     android:layout_width="412dp"
@@ -163,9 +173,10 @@
 
     <TextView
         android:id="@+id/tv_BmiValue"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:background="#BBDDCC"
         android:text="@string/lbl_BmiVal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

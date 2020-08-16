@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".viewBmiRecords">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.75"
+        android:background="@drawable/background2"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></RelativeLayout>
+
     <TableRow
         android:id="@+id/tableRow"
         android:layout_width="412dp"
@@ -56,6 +65,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
         android:text="@string/lbl_DateOfRecord"
+        android:textColor="#020000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_calcNew" />
 
@@ -65,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/dateOfR"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_date"
         app:layout_constraintStart_toEndOf="@+id/tv_date" />
 
@@ -75,6 +86,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:text="@string/lbl_Height"
+        android:textColor="#020000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -85,6 +97,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:text="@string/lbl_Weight"
+        android:textColor="#020000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -94,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/feetOfR"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView5" />
 
@@ -103,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/lbl_hFeet"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView7" />
 
@@ -112,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/inchesOfR"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView8" />
 
@@ -121,6 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/lbl_hInches"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView9" />
 
@@ -130,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/weightOfR"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
@@ -139,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/lbl_WKg"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView12" />
 
@@ -149,6 +168,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:text="@string/lbl_BmiVal"
+        android:textColor="#020000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
@@ -158,6 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/bmiOfR"
+        android:textColor="#020000"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
         app:layout_constraintStart_toEndOf="@+id/textView14" />
 

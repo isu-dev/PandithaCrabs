@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class updateBmiRecord extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class updateBmiRecord extends AppCompatActivity {
     public void openBmiHistory(View view)
     {
         Intent intent = new Intent(this, viewBmiRecords.class);
+        Toast.makeText(this, "Opening History", Toast.LENGTH_SHORT).show(); //toast describing user action of opening history
         startActivity(intent);
     }
 
@@ -65,6 +67,7 @@ public class updateBmiRecord extends AppCompatActivity {
     public void updateRecord(View view)
     {
         Intent intent = new Intent(this, viewBmiRecords.class);
+        Toast.makeText(this, "Updating Record", Toast.LENGTH_SHORT).show(); //toast describing user action of update
         startActivity(intent);
     }
 }
