@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fitme.fat.BFCalculatorActivity;
+import com.example.fitme.fat.BFMainActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToBMICalculator(View view) {
-        Intent intent = new Intent(this, BFCalculatorActivity.class);
+        Intent intent = new Intent(this, BFMainActivity.class);
         startActivity(intent);
     }
 }

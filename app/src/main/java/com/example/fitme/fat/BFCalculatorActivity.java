@@ -2,13 +2,17 @@ package com.example.fitme.fat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.fitme.MainActivity;
 import com.example.fitme.R;
 
 public class BFCalculatorActivity extends AppCompatActivity {
@@ -19,11 +23,35 @@ public class BFCalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bf_calculator);
 
 
-        // Displaying the back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Context ctx = this;
+
+        ImageView homeButton = findViewById(R.id.bfCalHomeButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(ctx, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView menuButton = findViewById(R.id.bfCalMenuButton);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(ctx, BFMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-        setTitle("Body Fat Calculator");
+        Button calButton = findViewById(R.id.bfCalBFButton);
+        calButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(ctx, BFResultActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goToResultPage(View view){
