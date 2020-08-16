@@ -1,6 +1,5 @@
 package com.example.fitme.shape;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,9 +22,9 @@ public class ShapeSaveActivity extends AppCompatActivity {
 
     private int updateId = 0;
 
-    private Double bustSize =0.0;
+    private Double bustSize = 0.0;
     private Double hipSize = 0.0;
-    private Double waistSize =0.0;
+    private Double waistSize = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +99,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         confirm.hide();
 
-                        if(ctx.updateId!=0){
+                        if (ctx.updateId != 0) {
                             ctx.goToList();
                         } else {
                             onBackPressed();
@@ -123,7 +121,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
 
         Button cancelBtn = findViewById(R.id.shapeSaveCancel);
 
-        if(this.updateId ==0) {
+        if (this.updateId == 0) {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -139,25 +137,25 @@ public class ShapeSaveActivity extends AppCompatActivity {
             });
         }
 
-        if(this.updateId!=0){
+        if (this.updateId != 0) {
 
             EditText bustMainInput = findViewById(R.id.bustMainInput);
-            bustMainInput.setText( String.valueOf(Math.round(Math.ceil(this.bustSize))));
+            bustMainInput.setText(String.valueOf(Math.round(Math.ceil(this.bustSize))));
 
             EditText bustSubInput = findViewById(R.id.bustSubInput);
-            bustSubInput.setText( String.valueOf(Math.round((this.bustSize%1)*100)));
+            bustSubInput.setText(String.valueOf(Math.round((this.bustSize % 1) * 100)));
 
             EditText waistMainInput = findViewById(R.id.waistMainInput);
-            waistMainInput.setText( String.valueOf(Math.round(Math.ceil(this.waistSize))));
+            waistMainInput.setText(String.valueOf(Math.round(Math.ceil(this.waistSize))));
 
             EditText waistSubInput = findViewById(R.id.waistSubInput);
-            waistSubInput.setText( String.valueOf(Math.round((this.waistSize%1)*100)));
+            waistSubInput.setText(String.valueOf(Math.round((this.waistSize % 1) * 100)));
 
             EditText hipMainInput = findViewById(R.id.hipMainInput);
-            hipMainInput.setText( String.valueOf(Math.round(Math.ceil(this.hipSize))));
+            hipMainInput.setText(String.valueOf(Math.round(Math.ceil(this.hipSize))));
 
             EditText hipSubInput = findViewById(R.id.hipSubInput);
-            hipSubInput.setText( String.valueOf(Math.round((this.hipSize%1)*100)));
+            hipSubInput.setText(String.valueOf(Math.round((this.hipSize % 1) * 100)));
 
             hipSubInput.notify();
 
@@ -187,7 +185,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.shapeListIcon :
+            case R.id.shapeListIcon:
 
                 this.goToList();
 
@@ -199,9 +197,9 @@ public class ShapeSaveActivity extends AppCompatActivity {
         }
     }
 
-    public void goToList(){
+    public void goToList() {
 
-        Intent intent =  new Intent(this, ShapeListActivity.class);
+        Intent intent = new Intent(this, ShapeListActivity.class);
         finish();
         startActivity(intent);
     }
