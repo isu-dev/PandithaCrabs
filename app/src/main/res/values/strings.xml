@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">FitMe</string>
     <string name="logo">FM</string>
+
+    <string name="bustSize">Bust Size:</string>
+    <string name="waistSize">Waist Size:</string>
+    <string name="hipSize">Hip Size:</string>
+    <string name="mainMeasurement">\'\'</string>
+    <string name="subMeasurement">Inch</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Okay</string>
+    <string name="no">Cancel</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+
     <string name="lbl_AddBmi">Calculate New BMI</string>
     <string name="btnBack"><![CDATA[<]]></string>
     <string name="lbl_Height">"Height : "</string>
@@ -21,4 +34,5 @@
     <string name="bmiOfR">20.32</string>
     <string name="btnUpdate">Update Record</string>
     <string name="btnDelete">Delete Record</string>
+
 </resources>

@@ -10,18 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".updateBmiRecord"></activity>
-        <activity android:name=".addBmiRecord">
-            <intent-filter>
+        <activity android:name=".addBmiRecord"></activity>
+        <activity android:name=".shape.ShapeListActivity"></activity>
+        <activity android:name=".shape.ShapeSaveActivity"></activity>
+        <activity android:name=".viewBmiRecords" />
+        <activity android:name=".MainActivity">
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewBmiRecords" />
-        <activity android:name=".MainActivity">
-
-        </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
