@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShapeSaveActivity">
+    tools:context=".shape.ShapeSaveActivity">
 
     <LinearLayout
         app:layout_constraintBottom_toBottomOf="parent"
@@ -185,6 +185,7 @@
                     android:layout_weight="1" />
 
                 <ImageView
+                    android:src="@drawable/question"
                     android:id="@+id/shapeSaveImage"
                     android:layout_width="160dp"
                     android:layout_height="160dp" />
