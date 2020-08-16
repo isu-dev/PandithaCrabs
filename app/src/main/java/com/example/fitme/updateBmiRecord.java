@@ -27,6 +27,12 @@ public class updateBmiRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_bmi_record);
+
+        //getting the value in the interface to variables inside the class
+        etHFeet = findViewById(R.id.etHFeet);
+        etHInches = findViewById(R.id.etHInches);
+        etWKg = findViewById(R.id.etWKg);
+        tvBmi = findViewById(R.id.tv_BmiValue);
     }
 
     //this function takes the user back to all the previous BMI records
