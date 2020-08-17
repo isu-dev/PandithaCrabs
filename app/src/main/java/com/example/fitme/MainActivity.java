@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToBMICalculator(View view) {
-        Intent intent = new Intent(this, viewBmiRecords.class);
+        Intent intent = new Intent(this, BFMainActivity.class);
 
     public void goToShapeCalculator(View view){
         Intent intent =  new Intent(this, ShapeSaveActivity.class);
