@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FitMe</string>
     <string name="logo">FM</string>
+
     <string name="sex">Sex</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
@@ -13,9 +14,39 @@
     <string name="weight">Weight</string>
     <string name="weightMeasure">Kg</string>
     <string name="calculate">Calculate</string>
+
+    <string name="bustSize">Bust Size:</string>
+    <string name="waistSize">Waist Size:</string>
+    <string name="hipSize">Hip Size:</string>
+    <string name="mainMeasurement">\'\'</string>
+    <string name="subMeasurement">Inch</string>
+    <string name="cancel">Cancel</string>
+
     <string name="yes">Okay</string>
     <string name="no">Cancel</string>
     <string name="save">Save</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+
+    <string name="lbl_AddBmi">Calculate New BMI</string>
+    <string name="btnBack"><![CDATA[<]]></string>
+    <string name="lbl_Height">"Height : "</string>
+    <string name="lbl_Weight">Weight :</string>
+    <string name="lbl_hFeet">feet</string>
+    <string name="lbl_hInches">inches</string>
+    <string name="lbl_WKg">kg</string>
+    <string name="lbl_UpdateBmi">Update BMI Record</string>
+    <string name="lbl_ViewBmi">My BMI Records</string>
+    <string name="btnCalc">Calculate BMI</string>
+    <string name="btnAddR">Add Record to History</string>
+    <string name="lbl_BmiVal">BMI :</string>
+    <string name="lbl_DateOfRecord">Date :</string>
+    <string name="dateOfR">2020/08/15</string>
+    <string name="feetOfR">5</string>
+    <string name="inchesOfR">7</string>
+    <string name="weightOfR">57</string>
+    <string name="bmiOfR">20.32</string>
+    <string name="btnUpdate">Update Record</string>
+    <string name="btnDelete">Delete Record</string>
+
 </resources>
