@@ -32,12 +32,10 @@
         android:textAlignment="gravity"
         android:textColor="#626D58"
         android:textSize="260sp"
-        android:onClick="goToBMICalculator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="goToShapeCalculator"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
