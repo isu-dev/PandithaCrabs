@@ -24,14 +24,4 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
-
-    public void goToBMICalculator(View view) {
-        Intent intent = new Intent(this, BFMainActivity.class);
-
-    public void goToShapeCalculator(View view){
-        Intent intent =  new Intent(this, ShapeSaveActivity.class);
-        intent.putExtra("UPDATE_ID", 0);
-        startActivity(intent);
-    }
 }

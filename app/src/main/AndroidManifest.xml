@@ -9,46 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateBmiRecord"></activity>
-        <activity android:name=".addBmiRecord"></activity>
-        <activity android:name=".shape.ShapeListActivity"></activity>
-        <activity android:name=".shape.ShapeSaveActivity"></activity>
+        <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake"></activity>
+        <activity android:name=".AppCommon.MainScreen" />
+        <activity android:name=".updateBmiRecord" />
+        <activity android:name=".addBmiRecord" />
+        <activity android:name=".shape.ShapeListActivity" />
+        <activity android:name=".shape.ShapeSaveActivity" />
         <activity android:name=".viewBmiRecords" />
         <activity android:name=".MainActivity">
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".fat.BFCalculatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fat.BFRecordsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".fat.BFCalculatorActivity" />
+        <activity android:name=".fat.BFRecordsActivity" />
+        <activity android:name=".fat.BFResultActivity" />
+        <activity android:name=".fat.BFMainActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".fat.BFResultActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".fat.BFMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
