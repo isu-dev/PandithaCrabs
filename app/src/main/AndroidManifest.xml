@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppCommon.MainAppScreen"></activity>
+        <activity android:name=".AppCommon.MainAppScreen" />
         <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake" />
         <activity android:name=".updateBmiRecord" />
         <activity android:name=".addBmiRecord" />
