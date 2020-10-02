@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake"></activity>
-        <activity android:name=".AppCommon.MainScreen" />
         <activity android:name=".updateBmiRecord" />
         <activity android:name=".addBmiRecord" />
         <activity android:name=".shape.ShapeListActivity" />
