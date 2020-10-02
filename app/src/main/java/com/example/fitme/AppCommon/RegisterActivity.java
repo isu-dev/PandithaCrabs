@@ -105,10 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Validate password
     private boolean validatePassword(String password, String confirmPassword) {
-        Pattern PASSWORD_PATTERN = Pattern.compile("^" +
-                "(?=.*[a-zA-Z])" +
-                "(?=\\S+$)" +
-                "$");
         if (password.isEmpty() | confirmPassword.isEmpty()) {
             et_password.setError("Password is required");
             et_confirm_password.setError("Confirm Password is required");
@@ -122,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
             et_confirm_password.requestFocus();
             return false;
 
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+        } else if (password.contains(" ")) {
             et_password.setError("No Spaces are allowed");
             et_password.requestFocus();
             return false;

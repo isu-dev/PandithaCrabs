@@ -50,6 +50,8 @@ public class CalorieRecordAdapter extends RecyclerView.Adapter{
         viewHolder.bt_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //delete particular calorie intake record and inputs
                 Daily_Calorie_Record daily_calorie_record = AllRecordList.get(viewHolder.getAdapterPosition());
                 FirebaseAuth userAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = userAuth.getCurrentUser();
@@ -64,6 +66,7 @@ public class CalorieRecordAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(final View view) {
 
+                //Fetch inputs for particular calorie intake record
                 FirebaseAuth userAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = userAuth.getCurrentUser();
                 Daily_Calorie_Record daily_calorie_record = AllRecordList.get(viewHolder.getAdapterPosition());
@@ -73,6 +76,8 @@ public class CalorieRecordAdapter extends RecyclerView.Adapter{
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         inputsForCalorieIntake = snapshot.child("Inputs").getValue(InputsForCalorieIntake.class);
                         System.out.println(inputsForCalorieIntake.getAge());
+
+                        //Pass InputsForCalorieIntake object to UpdateCalorieIntakeRecord Class
                         Intent intent = new Intent(view.getContext(),UpdateCalorieIntakeRecord.class);
                         intent.putExtra("Inputs",inputsForCalorieIntake);
                         view.getContext().startActivity(intent);
