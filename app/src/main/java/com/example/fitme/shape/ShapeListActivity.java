@@ -58,8 +58,8 @@ public class ShapeListActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup container) {
-            Shape item = this.items.get(position);
+        public View getView(final int position, View convertView, ViewGroup container) {
+            final Shape item = this.items.get(position);
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.card_shape_list, container, false);
             }
@@ -88,13 +88,13 @@ public class ShapeListActivity extends AppCompatActivity {
             hipSubText.setText( String.valueOf(Math.round((item.getHipSize()%1)*100)));
 
 
-            ShapeListAdapter adptr = this;
+            final ShapeListAdapter adptr = this;
             Button deleteBtn = convertView.findViewById(R.id.shapeCardDelete);
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ConfirmationToast confirm = new ConfirmationToast( adptr.superCtx,"Are you sure to delete this record?");
+                    final ConfirmationToast confirm = new ConfirmationToast( adptr.superCtx,"Are you sure to delete this record?");
 
                     confirm.setConfirmListener(new View.OnClickListener() {
                         @Override

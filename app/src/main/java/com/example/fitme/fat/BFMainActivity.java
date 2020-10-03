@@ -22,7 +22,7 @@ public class BFMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bf_main);
 
-        Context ctx = this;
+        final Context ctx = this;
 
         Button calculatorButton = findViewById(R.id.bfCalculatorButton);
         calculatorButton.setOnClickListener(new View.OnClickListener() {
