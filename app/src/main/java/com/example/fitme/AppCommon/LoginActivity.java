@@ -86,6 +86,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void DirectToRegister(View view){
+        startActivity(new Intent(this,RegisterActivity.class));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();

@@ -14,7 +14,13 @@
         <activity android:name=".AppCommon.HomeActivity" />
         <activity android:name=".AppCommon.RegisterActivity" />
         <activity android:name=".AppCommon.LoginActivity" />
-        <activity android:name=".AppCommon.MainAppScreen" />
+        <activity android:name=".AppCommon.MainAppScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake" />
         <activity android:name=".updateBmiRecord" />
         <activity android:name=".addBmiRecord" />
@@ -22,11 +28,7 @@
         <activity android:name=".shape.ShapeSaveActivity" />
         <activity android:name=".viewBmiRecords" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".fat.BFCalculatorActivity" />
         <activity android:name=".fat.BFRecordsActivity" />
