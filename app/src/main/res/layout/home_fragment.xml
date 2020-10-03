@@ -6,7 +6,7 @@
     android:background="@color/darkKhaki"
     android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="10">>
+    android:weightSum="10">
 
     <GridLayout
         android:id="@+id/mainGrid"
