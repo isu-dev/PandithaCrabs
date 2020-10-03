@@ -49,4 +49,68 @@
     <string name="btnUpdate">Update Record</string>
     <string name="btnDelete">Delete Record</string>
 
+    <!-- Login.xml resources-->
+    <string name="email_Input_Hint_Login">Email</string>
+    <string name="passWord_Hint">Password</string>
+    <string name="Log_In_Label">Log In</string>
+    <string name="LoginBtnLabel">Login</string>
+    <string name="RegisterBtnLabel">Need an account? Register</string>
+    <string name="app_Name_In_Main">FitMe</string>
+    <string name="register_btn_main_screen">Register</string>
+    <string name="UserNameInHeader">John</string>
+    <!--    -->
+
+    <!--  Home.fragment resource  -->
+    <string name="bmi_function">BMI Calculator</string>
+    <string name="daily_calorie_function">Daily Calorie Calculator</string>
+    <string name="body_fat_calculation_function">Body Fat Calculator</string>
+    <string name="body_shape_function">Body Shape Calculator</string>
+    <!--    -->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Register Activity    -->
+    <string name="register_label">Register</string>
+    <string name="user_name_input">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already have an account? Log In</string>
+    <!---->
+
+    <!-- calculate_daily_calorie_intake-->
+    <string name="AgeLabelCalorie">Age</string>
+    <string name="AgeHint">Age in years</string>
+    <string name="GenderLabelCalorie">Gender</string>
+    <string name="HeightFeetHint">Feet</string>
+    <string name="HeightInchesHint">Inches </string>
+    <string name="weightInputHintCalorie">Kg</string>
+    <string name="activityLabelCalorie">Activity Level</string>
+    <string name="typeOfPersonLabel">What type of person you are?</string>
+    <string name="calculate_dci_button_label">Calculate Daily Calorie Intake</string>
+    <string name="bt_label_save_results">Save Results</string>
+    <string name="bt_cancel_calculated_results">cancel</string>
+    <string name="result_dialog_title">Recommended Daily Calorie Intake</string>
+    <string name="bt_update_label">Update</string>
+    <string name="bt_delete_label">delete</string>
+
+    <!--Spinner Items-->
+    <string-array name="type_Of_Person">
+        <item>Fatty Person</item>
+        <item>Lean Body Builder</item>
+        <item>Normal Person</item>
+    </string-array>
+
+    <string-array name="Activity_Level">
+        <item>Sedentary</item>
+        <item>Light Active</item>
+        <item>Moderate Active</item>
+        <item>Very Active</item>
+    </string-array>
+
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <!--    -->
+
 </resources>

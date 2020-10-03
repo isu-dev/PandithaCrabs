@@ -52,7 +52,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Adding event handlers for number inputs
-        Integer[] textBoxIds = {R.id.bustMainInput, R.id.bustSubInput, R.id.waistMainInput, R.id.waistSubInput, R.id.hipMainInput, R.id.hipSubInput};
+        final Integer[] textBoxIds = {R.id.bustMainInput, R.id.bustSubInput, R.id.waistMainInput, R.id.waistSubInput, R.id.hipMainInput, R.id.hipSubInput};
         for (Integer textBoxId : textBoxIds) {
 
             EditText editText = findViewById(textBoxId);
@@ -87,13 +87,13 @@ public class ShapeSaveActivity extends AppCompatActivity {
 
 
         // Adding event listeners for buttons
-        ShapeSaveActivity ctx = this;
+        final ShapeSaveActivity ctx = this;
 
         Button saveBtn = findViewById(R.id.shapeSaveContinue);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConfirmationToast confirm = new ConfirmationToast(ctx, "Successfully saved your shape for today.");
+                final ConfirmationToast confirm = new ConfirmationToast(ctx, "Successfully saved your shape for today.");
                 confirm.setCancelListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

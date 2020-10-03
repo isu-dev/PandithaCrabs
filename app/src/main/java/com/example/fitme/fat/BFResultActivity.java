@@ -18,7 +18,7 @@ public class BFResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bf_result);
 
-        Context ctx = this;
+        final Context ctx = this;
 
         // Displaying the back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,7 +30,7 @@ public class BFResultActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
+                final BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
                 confirm.setConfirmListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
