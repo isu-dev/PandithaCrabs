@@ -59,7 +59,7 @@ public class BFRecordsActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup container) {
+        public View getView(final int position, View convertView, ViewGroup container) {
             BFPastRecord item = this.items.get(position);
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.item_bf_record, container, false);
@@ -91,13 +91,13 @@ public class BFRecordsActivity extends AppCompatActivity {
 
 
 
-            BFRecordsAdapter adptr = this;
+            final BFRecordsAdapter adptr = this;
             Button deleteBtn = convertView.findViewById(R.id.bmiDeleteButton);
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BFCalculatorToast confirm = new BFCalculatorToast( adptr.superCtx,"Are you sure to delete this record?");
+                    final BFCalculatorToast confirm = new BFCalculatorToast( adptr.superCtx,"Are you sure to delete this record?");
 
                     confirm.setConfirmListener(new View.OnClickListener() {
                         @Override

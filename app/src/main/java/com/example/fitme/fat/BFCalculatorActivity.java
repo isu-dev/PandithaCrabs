@@ -23,7 +23,7 @@ public class BFCalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bf_calculator);
 
 
-        Context ctx = this;
+        final Context ctx = this;
 
         ImageView homeButton = findViewById(R.id.bfCalHomeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
