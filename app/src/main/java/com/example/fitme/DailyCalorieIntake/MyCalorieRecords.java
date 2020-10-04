@@ -65,14 +65,11 @@ public class MyCalorieRecords extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                   /* Daily_Calorie_Record daily_calorie_record = dataSnapshot.getValue(Daily_Calorie_Record.class);
-                    allRecords.add(daily_calorie_record);*/
                     Daily_Calorie_Record daily_calorie_record = dataSnapshot.child("Calculated Results").getValue(Daily_Calorie_Record.class);
                     allRecords.add(daily_calorie_record);
                 }
                 calorieRecordAdapter = new CalorieRecordAdapter( allRecords);
                 recyclerView.setAdapter(calorieRecordAdapter);
-                /*recyclerView.scrollToPosition(allRecords.size() - 1);*/
             }
 
             @Override
