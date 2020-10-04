@@ -17,6 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitme.R;
 import com.example.fitme.fat.BFPastRecord;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +38,24 @@ public class BFRecordsActivity extends AppCompatActivity {
         BFRecordsAdapter(Context ctx){
             super();
 
-            this.items.add(new BFPastRecord(12.23, 23, 12.90, 123.23, 3.2, 4.4, "Male", "2020/02/010"));
-            this.items.add(new BFPastRecord(4.23, 23, 42.90, 12.3, 3.2, 4.4, "Male", "2020/03/01"));
-            this.items.add(new BFPastRecord(12.23, 24, 52.90, 1.23, 3.2, 4.4, "Male", "2020/05/07"));
-            this.items.add(new BFPastRecord(1.23, 25, 22.90, 4.3, 3.2, 4.4, "Male", "2020/06/02"));
-            this.items.add(new BFPastRecord(12.23, 25, 12.90, 1.2, 3.2, 4.4, "Male", "2020/07/01"));
-            this.items.add(new BFPastRecord(2.23, 25, 22.90, 2.3, 3.2, 4.4, "Male", "2020/08/01"));
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference("bodyFats");
 
+            final BFRecordsAdapter parent = this;
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    BFPastRecord pastRecord = dataSnapshot.getValue(BFPastRecord.class);
+                    parent.items.add(pastRecord);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+            
             this.superCtx = ctx;
         }
 
@@ -59,7 +75,7 @@ public class BFRecordsActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup container) {
+        public View getView(final int position, View convertView, ViewGroup container) {
             BFPastRecord item = this.items.get(position);
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.item_bf_record, container, false);
@@ -91,18 +107,25 @@ public class BFRecordsActivity extends AppCompatActivity {
 
 
 
-            BFRecordsAdapter adptr = this;
+            final BFRecordsAdapter adptr = this;
             Button deleteBtn = convertView.findViewById(R.id.bmiDeleteButton);
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BFCalculatorToast confirm = new BFCalculatorToast( adptr.superCtx,"Are you sure to delete this record?");
+                    final BFCalculatorToast confirm = new BFCalculatorToast( adptr.superCtx,"Are you sure to delete this record?");
 
                     confirm.setConfirmListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             ArrayList<BFPastRecord> items = new ArrayList<BFPastRecord>();
+
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = database.getReference("bodyFats");
+
+                            DatabaseReference bodyFatRef = ref.child( String.valueOf(position));
+                            bodyFatRef.removeValue();
+
                             adptr.items.remove(position);
                             adptr.notifyDataSetInvalidated();
                             confirm.hide();

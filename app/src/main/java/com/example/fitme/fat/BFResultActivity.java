@@ -1,6 +1,5 @@
 package com.example.fitme.fat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitme.MainActivity;
 import com.example.fitme.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class BFResultActivity extends AppCompatActivity {
 
@@ -18,7 +19,9 @@ public class BFResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bf_result);
 
-        Context ctx = this;
+        final BFResultActivity ctx = this;
+
+        final Intent intent = getIntent();
 
         // Displaying the back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,7 +33,41 @@ public class BFResultActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
+                String id = intent.getStringExtra("UPDATE_ID");
+                int age = Integer.parseInt(intent.getStringExtra("AGE"));
+                double height = Double.parseDouble(intent.getStringExtra("HEIGHT"));
+                double waist = Double.parseDouble(intent.getStringExtra("WAIST"));
+                double hip = Double.parseDouble(intent.getStringExtra("HIP"));
+                double neck = Double.parseDouble(intent.getStringExtra("NECK"));
+                double weight = Double.parseDouble(intent.getStringExtra("WEIGHT"));
+                double bodyFat = Double.parseDouble(intent.getStringExtra("BODYFAT"));
+
+                BFCalculator calculator = new BFCalculator();
+                calculator.setAge(age);
+                calculator.setHeight(height);
+                calculator.setWaist(waist);
+                calculator.setHip(hip);
+                calculator.setNeck(neck);
+                calculator.setWeight(weight);
+                calculator.setBodyFat(bodyFat);
+
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("");
+
+
+                DatabaseReference bodyFatRef = ref.child("bodyFats");
+                if(id==null) {
+                    DatabaseReference newBodyFatRef = bodyFatRef.push();
+
+                    bodyFatRef.setValue(calculator);
+                } else {
+                    DatabaseReference bodyFatRefExist = bodyFatRef.child(id);
+
+                    bodyFatRefExist.setValue(calculator);
+                }
+
+                final BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
+
                 confirm.setConfirmListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -54,6 +91,7 @@ public class BFResultActivity extends AppCompatActivity {
                 confirm.show();
             }
         });
+
 
         Button cancelBtn = findViewById(R.id.bfResultCancel);
 

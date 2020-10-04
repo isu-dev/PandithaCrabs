@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName8"
+        android:id="@+id/ageInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -46,11 +46,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintStart_toEndOf="@+id/textView15" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName7"
+        android:id="@+id/heightInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -61,13 +60,13 @@
         android:inputType="textPersonName"
         android:text=" "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName8"
+        app:layout_constraintBottom_toTopOf="@+id/ageInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/waistInput" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/waistInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -79,13 +78,13 @@
         android:inputType="textPersonName"
         android:text=" "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName6"
+        app:layout_constraintBottom_toTopOf="@+id/heightInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintTop_toBottomOf="@+id/hipInput" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/hipInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -96,10 +95,10 @@
         android:inputType="textPersonName"
         android:text=" "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName7"
+        app:layout_constraintBottom_toTopOf="@+id/waistInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/neckInput" />
 
     <TextView
         android:id="@+id/textView15"
@@ -262,7 +261,7 @@
         app:layout_constraintVertical_bias="0.555" />
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/radioButtonMale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Male"
@@ -274,7 +273,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/radioButtonFemale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Female"
@@ -292,7 +291,7 @@
         android:layout_marginTop="55dp"
         android:text="(cm)"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonMale"
         tools:layout_editor_absoluteX="130dp" />
 
     <TextView
@@ -305,7 +304,7 @@
         tools:layout_editor_absoluteY="240dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/neckInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -317,13 +316,14 @@
         android:inputType="textPersonName"
         android:text=" "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName4"
+        app:layout_constraintBottom_toTopOf="@+id/hipInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+        app:layout_constraintTop_toBottomOf="@+id/weightInput" />
+
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/weightInput"
         android:layout_width="211dp"
         android:layout_height="36dp"
         android:layout_marginStart="25dp"
@@ -335,10 +335,10 @@
         android:inputType="textPersonName"
         android:text=" "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName5"
+        app:layout_constraintBottom_toTopOf="@+id/bfCalBFButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/neckInput" />
 
     <Button
         android:id="@+id/bfCalBFButton"
@@ -354,6 +354,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+        app:layout_constraintTop_toBottomOf="@+id/weightInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
