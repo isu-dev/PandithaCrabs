@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.espresso.intent.Intents;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -43,4 +44,6 @@ public class CalculateCalorieIntakeInstrumentedTest {
         onView(withId(R.id.bt_calorie_calculate)).check(matches(isDisplayed()));
         onView(withId(R.id.bottomNavigationView)).check(matches(isDisplayed()));
     }
+
+
 }
