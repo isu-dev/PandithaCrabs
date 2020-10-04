@@ -48,6 +48,8 @@
     <string name="bmiOfR">20.32</string>
     <string name="btnUpdate">Update Record</string>
     <string name="btnDelete">Delete Record</string>
+    <string name="category">Category :</string>
+
 
     <!-- Login.xml resources-->
     <string name="email_Input_Hint_Login">Email</string>
@@ -112,5 +114,6 @@
         <item>Female</item>
     </string-array>
     <!--    -->
+
 
 </resources>

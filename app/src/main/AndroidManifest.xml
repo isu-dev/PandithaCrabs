@@ -9,24 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".bmi.updateBmiRecord"></activity>
+        <activity android:name=".bmi.addBmiRecord">
+
         <activity android:name=".DailyCalorieIntake.UpdateCalorieIntakeRecord"></activity>
         <activity android:name=".DailyCalorieIntake.MyCalorieRecords" />
         <activity android:name=".AppCommon.HomeActivity" />
         <activity android:name=".AppCommon.RegisterActivity" />
         <activity android:name=".AppCommon.LoginActivity" />
         <activity android:name=".AppCommon.MainAppScreen" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".bmi.viewBmiRecords" />
+
         <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake" />
         <activity android:name=".updateBmiRecord" />
         <activity android:name=".addBmiRecord" />
         <activity android:name=".shape.ShapeListActivity" />
         <activity android:name=".shape.ShapeSaveActivity" />
         <activity android:name=".viewBmiRecords" />
+
         <activity android:name=".MainActivity">
 
         </activity>
