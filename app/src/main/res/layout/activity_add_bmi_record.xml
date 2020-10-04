@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addBmiRecord">
+    tools:context=".bmi.addBmiRecord">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -151,7 +151,6 @@
         android:layout_height="46dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#CCCD7E"
-        android:onClick="calculateBmi"
         android:text="@string/btnCalc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

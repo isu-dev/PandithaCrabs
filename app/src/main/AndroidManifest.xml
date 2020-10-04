@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateBmiRecord"></activity>
-        <activity android:name=".addBmiRecord">
+        <activity android:name=".bmi.updateBmiRecord"></activity>
+        <activity android:name=".bmi.addBmiRecord">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewBmiRecords" />
+        <activity android:name=".bmi.viewBmiRecords" />
         <activity android:name=".MainActivity">
 
         </activity>

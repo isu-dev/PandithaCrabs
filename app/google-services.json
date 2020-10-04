@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "612495245706",
+    "firebase_url": "https://fitme-bf7f4.firebaseio.com",
+    "project_id": "fitme-bf7f4",
+    "storage_bucket": "fitme-bf7f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612495245706:android:d2e81e5a2afa6aa525c873",
+        "android_client_info": {
+          "package_name": "com.example.fitme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612495245706-9f5vu7j0392qon32qn0eb67p2bpsnkvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF85kT5xPWUqwfULFY7yHUFA6eqGdBhrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612495245706-9f5vu7j0392qon32qn0eb67p2bpsnkvn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
