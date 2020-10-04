@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:title="My Records"
+        android:id="@+id/fatListIcon"
+        android:icon="@drawable/fat_list_icon"
+        app:showAsAction="always"
+        android:orderInCategory="100"
+        />
+</menu>

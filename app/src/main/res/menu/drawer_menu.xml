@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/bmi_records"
+            android:title="BMI Records"/>
+        <item
+            android:id="@+id/fat_records"
+            android:title="Fat Precentage Records"/>
+        <item
+            android:id="@+id/calorie_intake_records"
+            android:title="Calorie Intake Records"/>
+        <item
+            android:id="@+id/body_shape_records"
+            android:title="Body Shape Records"/>
+        <item
+            android:id="@+id/settings"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/signout"
+            android:title="Sign Out"/>
+        <item
+            android:id="@+id/help_and_feedback"
+            android:title="Help and Feed Back"/>
+
+    </group>
+</menu>
