@@ -43,7 +43,7 @@ public class updateBmiRecord extends AppCompatActivity {
         setContentView(R.layout.activity_update_bmi_record);
 
         Intent intent = getIntent();
-        recordid = intent.getStringExtra(recordID);
+        recordid = intent.getStringExtra("recordID");
 
 
         //getting the value in the interface to variables inside the class
