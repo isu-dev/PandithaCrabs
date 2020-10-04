@@ -27,4 +27,19 @@ public class ExampleUnitTest {
         assertEquals(21.38, result, 0.1);
     }
 
+    @Test
+    public void findCategory_isCorrect() {
+        String result1 = addBmiRecord.findCategory(16.0);
+        assertEquals("Underweight", result1);
+
+        String result2 = addBmiRecord.findCategory(22.0);
+        assertEquals("Normal", result2);
+
+        String result3 = addBmiRecord.findCategory(27.0);
+        assertEquals("Overweight", result3);
+
+        String result4 = addBmiRecord.findCategory(31.0);
+        assertEquals("Obese", result4);
+    }
+
 }

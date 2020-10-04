@@ -26,7 +26,7 @@ public class addBmiRecord extends AppCompatActivity {
     EditText etHInches;
     EditText etWKg;
 
-    TextView tvBmi;
+    TextView tvBmi, tvBmiCategory;
 
     Button btnCalculate;
 
@@ -50,6 +50,7 @@ public class addBmiRecord extends AppCompatActivity {
         etHInches = findViewById(R.id.etHInches);
         etWKg = findViewById(R.id.etWKg);
         tvBmi = findViewById(R.id.tv_BmiValue);
+        tvBmiCategory = findViewById(R.id.tv_BmiCategory);
 
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
@@ -77,9 +78,12 @@ public class addBmiRecord extends AppCompatActivity {
                     DecimalFormat precision = new DecimalFormat("0.00");
                     double result = calculateBmi(feet, inches, weight);
 
+                    String category = findCategory(result);
+
                     //displaying the calculated BMI value
                     //tvBmi.setText("BMI : " +  bmiVal);
                     tvBmi.setText(precision.format(result));
+                    tvBmiCategory.setText("Category : " + category);
                 }
             }
         });
@@ -98,6 +102,22 @@ public class addBmiRecord extends AppCompatActivity {
         bmiVal = weight / (heightInMetres * heightInMetres);
 
         return bmiVal;
+    }
+
+    //finding the category of the the bmi value
+    public String findCategory(double bmiVal) {
+        String category;
+
+        if(bmiVal < 18.5)
+            category = "Underweight";
+        else if(bmiVal <= 24.9)
+            category = "Normal";
+        else if(bmiVal <= 29.9)
+            category = "Overweight";
+        else
+            category = "Obese";
+
+        return category;
     }
 
     //function to view all BMI calculation records after adding the record to the database
