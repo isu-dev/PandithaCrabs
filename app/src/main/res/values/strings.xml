@@ -12,7 +12,7 @@
     <string name="lbl_ViewBmi">My BMI Records</string>
     <string name="btnCalc">Calculate BMI</string>
     <string name="btnAddR">Add Record to History</string>
-    <string name="lbl_BmiVal">BMI :</string>
+    <string name="lbl_BmiVal">BMI</string>
     <string name="lbl_DateOfRecord">Date :</string>
     <string name="dateOfR">2020/08/15</string>
     <string name="feetOfR">5</string>
@@ -21,5 +21,5 @@
     <string name="bmiOfR">20.32</string>
     <string name="btnUpdate">Update Record</string>
     <string name="btnDelete">Delete Record</string>
-    <string name="category">Category :</string>
+    <string name="category">Category</string>
 </resources>

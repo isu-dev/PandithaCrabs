@@ -28,7 +28,7 @@ public class addBmiRecord extends AppCompatActivity {
 
     TextView tvBmi, tvBmiCategory;
 
-    Button btnCalculate;
+    Button btnCalculate, btn_addRecord;
 
     int feet;
     int inches;
@@ -36,6 +36,7 @@ public class addBmiRecord extends AppCompatActivity {
     double heightInMetres;
     double heightInCm;
     double bmiVal;
+    String category;
 
     DatabaseReference dbRef;
     bmiRecord record;
@@ -51,12 +52,14 @@ public class addBmiRecord extends AppCompatActivity {
         etWKg = findViewById(R.id.etWKg);
         tvBmi = findViewById(R.id.tv_BmiValue);
         tvBmiCategory = findViewById(R.id.tv_BmiCategory);
-
+        btnCalculate = findViewById(R.id.btnCalculate);
+        btn_addRecord = findViewById(R.id.btn_addRecord);
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //ensuring that all fields are filled
                 if( (etHFeet.getText().length() == 0) && (etHInches.getText().length() != 0) && (etWKg.getText().length() != 0) ) {
                     Toast.makeText(getApplicationContext(), "Please enter value for height in whole feet", Toast.LENGTH_SHORT).show();
                     return;
@@ -78,35 +81,41 @@ public class addBmiRecord extends AppCompatActivity {
                     DecimalFormat precision = new DecimalFormat("0.00");
                     double result = calculateBmi(feet, inches, weight);
 
-                    String category = findCategory(result);
+                    category = findCategory(result);
 
-                    //displaying the calculated BMI value
-                    //tvBmi.setText("BMI : " +  bmiVal);
-                    tvBmi.setText(precision.format(result));
+                    //displaying the calculated BMI value and the category
+                    tvBmi.setText("BMI : " + precision.format(result));
                     tvBmiCategory.setText("Category : " + category);
                 }
+
             }
         });
     }
 
 
     //this function calculates the BMI value
-    public double calculateBmi(int feet, int inches, int weight)
-    {
+    public double calculateBmi(int feet, int inches, int weight) {
+
+        //converting the entered values to integers
+        feet = Integer.parseInt(etHFeet.getText().toString());
+        inches = Integer.parseInt(etHInches.getText().toString());
+        weight = Integer.parseInt(etWKg.getText().toString());
 
         //calculating the height in metres
         heightInCm = ((feet * 12) + inches) * 2.5;
         heightInMetres = heightInCm / 100.0;
 
+        DecimalFormat precision = new DecimalFormat("0.00");
+
         //calculating the BMI value
-        bmiVal = weight / (heightInMetres * heightInMetres);
+        double bmiVal = weight / (heightInMetres * heightInMetres);
 
         return bmiVal;
+
     }
 
     //finding the category of the the bmi value
     public String findCategory(double bmiVal) {
-        String category;
 
         if(bmiVal < 18.5)
             category = "Underweight";
@@ -128,11 +137,12 @@ public class addBmiRecord extends AppCompatActivity {
         record.setHeightInches(Integer.parseInt(etHInches.getText().toString().trim()));
         record.setWeightKg(Integer.parseInt(etWKg.getText().toString().trim()));
         record.setBmiVal(bmiVal);
+        record.setBmiCategory(category);
         dbRef.push().setValue(record);
-        //dbRef.child("s123").setValue(record);
 
+        //toast describing user action of add
         Intent intent = new Intent(this, viewBmiRecords.class);
-        Toast.makeText(this, "Adding record to History", Toast.LENGTH_SHORT).show(); //toast describing user action of add
+        Toast.makeText(this, "Adding record to History", Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 
