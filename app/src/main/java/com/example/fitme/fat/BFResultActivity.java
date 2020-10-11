@@ -19,9 +19,13 @@ public class BFResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bf_result);
 
+
         final BFResultActivity ctx = this;
 
         final Intent intent = getIntent();
+
+        final Context ctx = this;
+
 
         // Displaying the back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -33,6 +37,7 @@ public class BFResultActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String id = intent.getStringExtra("UPDATE_ID");
                 int age = Integer.parseInt(intent.getStringExtra("AGE"));
                 double height = Double.parseDouble(intent.getStringExtra("HEIGHT"));
@@ -65,6 +70,9 @@ public class BFResultActivity extends AppCompatActivity {
 
                     bodyFatRefExist.setValue(calculator);
                 }
+
+                final BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
+
 
                 final BFCalculatorToast confirm = new BFCalculatorToast(ctx,"Successfully saved the result.");
 

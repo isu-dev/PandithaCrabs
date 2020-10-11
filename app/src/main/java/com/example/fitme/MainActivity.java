@@ -21,17 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_screen);
     }
 
-
-
-    public void goToBMICalculator(View view) {
-        Intent intent = new Intent(this, viewBmiRecords.class);
-
-    public void goToShapeCalculator(View view){
-        Intent intent =  new Intent(this, ShapeSaveActivity.class);
-        intent.putExtra("UPDATE_ID", 0);
-        startActivity(intent);
-    }
 }

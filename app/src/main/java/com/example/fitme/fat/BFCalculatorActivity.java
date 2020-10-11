@@ -32,6 +32,10 @@ public class BFCalculatorActivity extends AppCompatActivity {
 
         final BFCalculatorActivity ctx = this;
 
+
+        final Context ctx = this;
+
+
         ImageView homeButton = findViewById(R.id.bfCalHomeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
