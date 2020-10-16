@@ -17,13 +17,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class updateBmiRecord extends AppCompatActivity {
 
     EditText etHFeet;
     EditText etHInches;
     EditText etWKg;
 
-    TextView tvBmi;
+    TextView tvBmi, tvBmiCategory;
 
     int feet;
     int inches;
@@ -31,6 +33,8 @@ public class updateBmiRecord extends AppCompatActivity {
     double heightInMetres;
     double heightInCm;
     double bmiVal;
+    String category;
+
 
     DatabaseReference dbRef;
     bmiRecord record;
@@ -42,8 +46,8 @@ public class updateBmiRecord extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_bmi_record);
 
-        Intent intent = getIntent();
-        recordid = intent.getStringExtra("recordID");
+        /*Intent intent = getIntent();
+        recordid = intent.getStringExtra("recordID");*/
 
 
         //getting the value in the interface to variables inside the class
@@ -51,8 +55,28 @@ public class updateBmiRecord extends AppCompatActivity {
         etHInches = findViewById(R.id.etHInches);
         etWKg = findViewById(R.id.etWKg);
         tvBmi = findViewById(R.id.tv_BmiValue);
+        tvBmiCategory = findViewById(R.id.tv_BmiCategory);
 
-        viewIndividual();
+        //viewIndividual();
+
+        if((etHFeet.getText().length() != 0) && (etHInches.getText().length() != 0) && (etWKg.getText().length() != 0)) {
+            feet = Integer.parseInt(etHFeet.getText().toString());
+            inches = Integer.parseInt(etHInches.getText().toString());
+            weight = Integer.parseInt(etWKg.getText().toString());
+
+            DecimalFormat precision = new DecimalFormat("0.00");
+            double result = calculateBmi(feet, inches, weight);
+
+            category = findCategory(result);
+
+            //displaying the calculated BMI value and the category
+            tvBmi.setText("BMI : " + precision.format(result));
+            tvBmiCategory.setText("Category : " + category);
+        } else {
+            Toast.makeText(this, "Please enter values", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
     }
 
     //this function takes the user back to all the previous BMI records
@@ -64,7 +88,7 @@ public class updateBmiRecord extends AppCompatActivity {
     }
 
     //this function calculates the BMI value
-    public void calculateBmi(View view)
+    public double calculateBmi(int feet, int inches, int weight)
     {
         //converting the entered values to integers
         feet = Integer.parseInt(etHFeet.getText().toString());
@@ -78,8 +102,23 @@ public class updateBmiRecord extends AppCompatActivity {
         //calculating the BMI value
         bmiVal = weight / (heightInMetres * heightInMetres);
 
-        //displaying the calculated BMI value
-        tvBmi.setText("BMI : " + bmiVal);
+        return bmiVal;
+
+    }
+
+    //finding the category of the the bmi value
+    public String findCategory(double bmiVal) {
+
+        if(bmiVal < 18.5)
+            category = "Underweight";
+        else if(bmiVal <= 24.9)
+            category = "Normal";
+        else if(bmiVal <= 29.9)
+            category = "Overweight";
+        else
+            category = "Obese";
+
+        return category;
     }
 
     //function to view history after updating the selected BMI Record
@@ -95,6 +134,7 @@ public class updateBmiRecord extends AppCompatActivity {
                         record.setHeightInches(Integer.parseInt(etHInches.getText().toString().trim()));
                         record.setWeightKg(Integer.parseInt(etWKg.getText().toString().trim()));
                         record.setBmiVal(bmiVal);
+                        record.setBmiCategory(category);
 
                         dbRef = FirebaseDatabase.getInstance().getReference().child("bmiRecord").child(recordid);
                         dbRef.setValue(record);
@@ -115,16 +155,18 @@ public class updateBmiRecord extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //view details of selected entry
     private void viewIndividual() {
         dbRef = FirebaseDatabase.getInstance().getReference().child("bmiRecord").child(recordid);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if( snapshot.hasChildren() ) {
+                if( snapshot.hasChild(recordid)) {
                     etHFeet.setText(snapshot.child("heightFeet").getValue().toString());
                     etHInches.setText(snapshot.child("heightInches").getValue().toString());
                     etWKg.setText(snapshot.child("weightKg").getValue().toString());
                     tvBmi.setText(snapshot.child("bmiVal").getValue().toString());
+                    tvBmiCategory.setText(snapshot.child("bmiCatory").getValue().toString());
                 } else {
                     Toast.makeText(updateBmiRecord.this, "No source to display", Toast.LENGTH_SHORT).show();
                 }

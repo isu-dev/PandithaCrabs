@@ -5,6 +5,7 @@ public class bmiRecord {
     private int heightInches;
     private int weightKg;
     private double bmiVal;
+    private String bmiCategory;
 
     public bmiRecord() {}
 
@@ -38,5 +39,13 @@ public class bmiRecord {
 
     public void setBmiVal(double bmiVal) {
         this.bmiVal = bmiVal;
+    }
+
+    public String getBmiCategory() {
+        return bmiCategory;
+    }
+
+    public void setBmiCategory(String bmiCategory) {
+        this.bmiCategory = bmiCategory;
     }
 }

@@ -52,7 +52,6 @@
         android:layout_height="46dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#CCCD7E"
-        android:onClick="calculateBmi"
         android:text="@string/btnCalc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,10 +59,10 @@
         app:layout_constraintTop_toBottomOf="@+id/cardForCalculation" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_addRecord"
         android:layout_width="291dp"
         android:layout_height="46dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#CCCD7E"
         android:onClick="updateRecord"
         android:text="@string/lbl_UpdateBmi"
