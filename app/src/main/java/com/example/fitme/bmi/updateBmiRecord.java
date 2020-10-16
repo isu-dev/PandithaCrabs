@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class updateBmiRecord extends AppCompatActivity {
 
     EditText etHFeet;
@@ -44,8 +46,8 @@ public class updateBmiRecord extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_bmi_record);
 
-        Intent intent = getIntent();
-        recordid = intent.getStringExtra("recordID");
+        /*Intent intent = getIntent();
+        recordid = intent.getStringExtra("recordID");*/
 
 
         //getting the value in the interface to variables inside the class
@@ -53,11 +55,28 @@ public class updateBmiRecord extends AppCompatActivity {
         etHInches = findViewById(R.id.etHInches);
         etWKg = findViewById(R.id.etWKg);
         tvBmi = findViewById(R.id.tv_BmiValue);
+        tvBmiCategory = findViewById(R.id.tv_BmiCategory);
 
-        viewIndividual();
+        //viewIndividual();
 
-        category = findCategory(bmiVal);
-        tvBmiCategory.setText("Category : " + category);
+        if((etHFeet.getText().length() != 0) && (etHInches.getText().length() != 0) && (etWKg.getText().length() != 0)) {
+            feet = Integer.parseInt(etHFeet.getText().toString());
+            inches = Integer.parseInt(etHInches.getText().toString());
+            weight = Integer.parseInt(etWKg.getText().toString());
+
+            DecimalFormat precision = new DecimalFormat("0.00");
+            double result = calculateBmi(feet, inches, weight);
+
+            category = findCategory(result);
+
+            //displaying the calculated BMI value and the category
+            tvBmi.setText("BMI : " + precision.format(result));
+            tvBmiCategory.setText("Category : " + category);
+        } else {
+            Toast.makeText(this, "Please enter values", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
     }
 
     //this function takes the user back to all the previous BMI records
@@ -69,7 +88,7 @@ public class updateBmiRecord extends AppCompatActivity {
     }
 
     //this function calculates the BMI value
-    public void calculateBmi(View view)
+    public double calculateBmi(int feet, int inches, int weight)
     {
         //converting the entered values to integers
         feet = Integer.parseInt(etHFeet.getText().toString());
@@ -83,8 +102,7 @@ public class updateBmiRecord extends AppCompatActivity {
         //calculating the BMI value
         bmiVal = weight / (heightInMetres * heightInMetres);
 
-        //displaying the calculated BMI value
-        tvBmi.setText("BMI : " + bmiVal);
+        return bmiVal;
 
     }
 

@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitme.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +42,8 @@ public class addBmiRecord extends AppCompatActivity {
     double bmiVal;
     String category;
 
+    private FirebaseAuth userAuth;
+    private FirebaseUser currentUser;
     DatabaseReference dbRef;
     bmiRecord record;
 
@@ -138,7 +144,34 @@ public class addBmiRecord extends AppCompatActivity {
         record.setWeightKg(Integer.parseInt(etWKg.getText().toString().trim()));
         record.setBmiVal(bmiVal);
         record.setBmiCategory(category);
-        dbRef.push().setValue(record);
+        //dbRef.push().setValue(record);
+
+        /*
+        //dbRef = FirebaseDatabase.getInstance().getReference("BMI Records").child(currentUser.getUid());
+        String uniqueIdForCalorieRecord = dbRef.push().getKey();
+        //dbRef.setRecordId(uniqueIdForCalorieRecord);
+        //inputsForCalorieIntake.setId(uniqueIdForCalorieRecord);
+        dbRef.child(uniqueIdForCalorieRecord).child("Calculated Results").setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Successfully inserted",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Error " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        dbRef.child(uniqueIdForCalorieRecord).child("Inputs").setValue(record).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Successfully inserted",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Error " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
 
         //toast describing user action of add
         Intent intent = new Intent(this, viewBmiRecords.class);

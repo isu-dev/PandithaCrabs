@@ -52,7 +52,6 @@
         android:layout_height="46dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#CCCD7E"
-        android:onClick="calculateBmi"
         android:text="@string/btnCalc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
