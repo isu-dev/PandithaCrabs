@@ -16,6 +16,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitme.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +37,23 @@ public class ShapeListActivity extends AppCompatActivity {
         ShapeListAdapter(Context ctx){
             super();
 
-            this.items.add(new Shape(12.23, 23.08, 12.90, R.drawable.apple));
-            this.items.add(new Shape(4.23, 23.08, 42.90, R.drawable.pear));
-            this.items.add(new Shape(12.23, 21.08, 52.90, R.drawable.banana));
-            this.items.add(new Shape(1.23, 6.08, 22.90, R.drawable.apple));
-            this.items.add(new Shape(12.23, 23.08, 12.90, R.drawable.hour_glass));
-            this.items.add(new Shape(2.23, 3.08, 22.90, R.drawable.pear));
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference("bodyFats");
+
+            final ShapeListAdapter parent = this;
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Shape pastRecord = dataSnapshot.getValue(Shape.class);
+                    parent.items.add(pastRecord);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
 
             this.superCtx = ctx;
         }
@@ -69,24 +85,37 @@ public class ShapeListActivity extends AppCompatActivity {
             Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), item.getShape());
             imgView.setImageBitmap(bitmapImage);
 
+            long bustFeat = Math.round(item.getBustSize()/12);
             TextView bustMainText = convertView.findViewById(R.id.bustMainText);
-            bustMainText.setText( String.valueOf(Math.round(Math.ceil(item.getBustSize()))));
+            bustMainText.setText( String.valueOf(bustFeat));
 
+            double bustInch = item.getWaistSize() - (bustFeat*12);
             TextView bustSubText = convertView.findViewById(R.id.bustSubText);
-            bustSubText.setText( String.valueOf(Math.round((item.getBustSize()%1)*100)));
+            bustSubText.setText( String.valueOf(bustInch));
 
+            long waistFeat = Math.round(item.getWaistSize()/ 12);
             TextView waistMainText = convertView.findViewById(R.id.waistMainText);
-            waistMainText.setText( String.valueOf(Math.round(Math.ceil(item.getWaistSize()))));
+            waistMainText.setText( String.valueOf(Math.round(waistFeat)));
 
+            double waistInch = item.getWaistSize() - (waistFeat*12);
             TextView waistSubText = convertView.findViewById(R.id.waistSubText);
-            waistSubText.setText( String.valueOf(Math.round((item.getWaistSize()%1)*100)));
+            waistSubText.setText( String.valueOf(waistInch));
 
+            long hipFeat = Math.round(item.getWaistSize()/ 12);
             TextView hipMainText = convertView.findViewById(R.id.hipMainText);
-            hipMainText.setText( String.valueOf(Math.round(Math.ceil(item.getHipSize()))));
+            hipMainText.setText( String.valueOf(Math.round(hipFeat)));
 
+            double hipInch = item.getWaistSize() - (hipFeat*12);
             TextView hipSubText = convertView.findViewById(R.id.hipSubText);
-            hipSubText.setText( String.valueOf(Math.round((item.getHipSize()%1)*100)));
+            hipSubText.setText( String.valueOf(hipInch));
 
+            long highHipFeat = Math.round(item.getWaistSize()/ 12);
+            TextView highHipMainText = convertView.findViewById(R.id.highHipMainText);
+            highHipMainText.setText( String.valueOf(Math.round(highHipFeat)));
+
+            double highHipInch = item.getWaistSize() - (highHipFeat*12);
+            TextView highHipSubText = convertView.findViewById(R.id.highHipSubText);
+            highHipSubText.setText( String.valueOf(highHipInch));
 
             final ShapeListAdapter adptr = this;
             Button deleteBtn = convertView.findViewById(R.id.shapeCardDelete);
@@ -99,6 +128,12 @@ public class ShapeListActivity extends AppCompatActivity {
                     confirm.setConfirmListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = database.getReference("shapes");
+
+                            DatabaseReference bodyFatRef = ref.child( String.valueOf(position));
+                            bodyFatRef.removeValue();
+
                             ArrayList<Shape> items = new ArrayList<Shape>();
                             adptr.items.remove(position);
                             adptr.notifyDataSetInvalidated();
@@ -127,6 +162,7 @@ public class ShapeListActivity extends AppCompatActivity {
                     intent.putExtra("BUST_SIZE", item.getBustSize());
                     intent.putExtra("WAIST_SIZE", item.getWaistSize());
                     intent.putExtra("HIP_SIZE", item.getHipSize());
+                    intent.putExtra("HIGH_HIP_SIZE", item.getHighHipSize());
                     startActivity(intent);
                 }
             });

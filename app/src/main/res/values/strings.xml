@@ -18,8 +18,9 @@
     <string name="bustSize">Bust Size:</string>
     <string name="waistSize">Waist Size:</string>
     <string name="hipSize">Hip Size:</string>
-    <string name="mainMeasurement">\'\'</string>
-    <string name="subMeasurement">Inch</string>
+    <string name="highHipSize">High Hip Size:</string>
+    <string name="mainMeasurement">\'</string>
+    <string name="subMeasurement">\'\'</string>
     <string name="cancel">Cancel</string>
 
     <string name="yes">Okay</string>
