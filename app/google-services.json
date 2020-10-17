@@ -1,11 +1,6 @@
 {
   "project_info": {
 
-    "project_number": "612495245706",
-    "firebase_url": "https://fitme-bf7f4.firebaseio.com",
-    "project_id": "fitme-bf7f4",
-    "storage_bucket": "fitme-bf7f4.appspot.com"
-
     "project_number": "11828555612",
     "firebase_url": "https://fitme-10cb5.firebaseio.com",
     "project_id": "fitme-10cb5",
@@ -16,8 +11,6 @@
     {
       "client_info": {
 
-        "mobilesdk_app_id": "1:612495245706:android:d2e81e5a2afa6aa525c873",
-
         "mobilesdk_app_id": "1:11828555612:android:0e7a82ecbeacbad4571b99",
 
         "android_client_info": {
@@ -27,8 +20,6 @@
       "oauth_client": [
         {
 
-          "client_id": "612495245706-9f5vu7j0392qon32qn0eb67p2bpsnkvn.apps.googleusercontent.com",
-
           "client_id": "11828555612-28j5u1d0hh93dfije89iejn2orf9kaj4.apps.googleusercontent.com",
 
           "client_type": 3
@@ -36,8 +27,6 @@
       ],
       "api_key": [
         {
-
-          "current_key": "AIzaSyBF85kT5xPWUqwfULFY7yHUFA6eqGdBhrI"
 
           "current_key": "AIzaSyBJzOmDEuGGuTcaA_l6BBMSyOH1dr0xGKA"
 
@@ -48,7 +37,6 @@
           "other_platform_oauth_client": [
             {
 
-              "client_id": "612495245706-9f5vu7j0392qon32qn0eb67p2bpsnkvn.apps.googleusercontent.com",
 
               "client_id": "11828555612-28j5u1d0hh93dfije89iejn2orf9kaj4.apps.googleusercontent.com",
 
