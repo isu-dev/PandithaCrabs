@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fitme.AppCommon.HomeActivity;
 import com.example.fitme.MainActivity;
 import com.example.fitme.R;
 
@@ -48,7 +49,7 @@ public class BFMainActivity extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(ctx, MainActivity.class);
+                Intent intent =  new Intent(ctx, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +58,7 @@ public class BFMainActivity extends AppCompatActivity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(ctx, MainActivity.class);
+                Intent intent =  new Intent(ctx, HomeActivity.class);
                 startActivity(intent);
             }
         });

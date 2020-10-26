@@ -51,8 +51,6 @@
     <string name="btnUpdate">Update Record</string>
     <string name="btnDelete">Delete Record</string>
 
-    <string name="category">Category :</string>
-
 
     <!-- Login.xml resources-->
     <string name="email_Input_Hint_Login">Email</string>
@@ -121,5 +119,7 @@
 
 
     <string name="category">Category</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
 
 </resources>

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".bmi.updateBmiRecord"></activity>
-        <activity android:name=".bmi.addBmiRecord">
+        <activity android:name=".bmi.addBmiRecord"/>
 
         <activity android:name=".DailyCalorieIntake.UpdateCalorieIntakeRecord"></activity>
         <activity android:name=".DailyCalorieIntake.MyCalorieRecords" />
@@ -32,17 +32,17 @@
         <activity android:name=".DailyCalorieIntake.CalculateDailyCalorieIntake" />
         <activity android:name=".updateBmiRecord" />
         <activity android:name=".addBmiRecord" />
-        <activity android:name=".shape.ShapeListActivity" />
-        <activity android:name=".shape.ShapeSaveActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".shape.ShapeListActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".shape.ShapeSaveActivity" />
         <activity android:name=".viewBmiRecords" />
 
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".fat.BFCalculatorActivity" />
-        <activity android:name=".fat.BFRecordsActivity" />
-        <activity android:name=".fat.BFResultActivity" />
-        <activity android:name=".fat.BFMainActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".fat.BFCalculatorActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".fat.BFRecordsActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".fat.BFResultActivity" />
+        <activity android:theme="@style/AppBarTheme" android:name=".fat.BFMainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

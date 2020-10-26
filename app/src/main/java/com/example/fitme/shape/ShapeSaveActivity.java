@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.fitme.R;
 import com.google.firebase.database.DatabaseReference;
@@ -22,38 +23,27 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ShapeSaveActivity extends AppCompatActivity {
 
-    private int updateId = 0;
+    private String updateId;
 
-    private Double bustSize = 0.0;
-    private Double hipSize = 0.0;
-    private Double waistSize = 0.0;
-    private Double highHipSize = 0.0;
+    private Integer bustSize = 0;
+    private Integer hipSize = 0;
+    private Integer waistSize = 0;
+    private Integer highHipSize = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shape_save);
-
         Intent intent = getIntent();
 
-        String updateIdStr = intent.getStringExtra("UPDATE_ID");
-        try {
-            Integer updateId = Integer.parseInt(updateIdStr);
+        final String updateId = intent.getStringExtra("UPDATE_ID");
+        if(updateId!=null){
             this.updateId = updateId;
-            this.bustSize = Double.parseDouble(intent.getStringExtra("BUST_SIZE"));
-            this.waistSize = Double.parseDouble(intent.getStringExtra("WAIST_SIZE"));
-            this.hipSize = Double.parseDouble(intent.getStringExtra("HIP_SIZE"));
-            this.highHipSize = Double.parseDouble(intent.getStringExtra("HIGH_HIP_SIZE"));
-
-        } catch (NumberFormatException e) {
-
+            this.bustSize = ((Double)Double.parseDouble(intent.getStringExtra("BUST_SIZE"))).intValue();
+            this.waistSize = ((Double)Double.parseDouble(intent.getStringExtra("WAIST_SIZE"))).intValue();
+            this.hipSize = ((Double)Double.parseDouble(intent.getStringExtra("HIP_SIZE"))).intValue();
+            this.highHipSize = ((Double)Double.parseDouble(intent.getStringExtra("HIGH_HIP_SIZE"))).intValue();
         }
-
-
-        // Displaying the back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Shape calculator = new Shape();
 
@@ -77,8 +67,6 @@ public class ShapeSaveActivity extends AppCompatActivity {
 
                     if (validated) {
                         ImageView imgView = findViewById(R.id.shapeSaveImage);
-
-                        Shape calculator = new Shape();
 
                         EditText bustMainInput = findViewById(R.id.bustMainInput);
                         int bustFeat = Integer.parseInt(bustMainInput.getText().toString());
@@ -107,10 +95,9 @@ public class ShapeSaveActivity extends AppCompatActivity {
                         EditText highHipSubInput = findViewById(R.id.highHipSubInput);
                         int highHipInch = Integer.parseInt(highHipSubInput.getText().toString()) + (highHipFeat*12);
                         calculator.setHighHipSize(highHipInch);
-
-
-
-                        Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), calculator.calculate());
+                        int shape = calculator.calculate();
+                        calculator.setShape(shape);
+                        Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), shape);
 
                         imgView.setImageBitmap(bitmapImage);
                         imgView.invalidate();
@@ -136,9 +123,8 @@ public class ShapeSaveActivity extends AppCompatActivity {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference("");
 
-
                 DatabaseReference shapeRef = ref.child("shapes");
-                if(updateId==0) {
+                if(updateId==null) {
                     DatabaseReference newShapeRef = shapeRef.push();
 
                     newShapeRef.setValue(calculator);
@@ -155,7 +141,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         confirm.hide();
 
-                        if (ctx.updateId != 0) {
+                        if (ctx.updateId != null) {
                             ctx.goToList();
                         } else {
                             onBackPressed();
@@ -177,7 +163,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
 
         Button cancelBtn = findViewById(R.id.shapeSaveCancel);
 
-        if (this.updateId == 0) {
+        if (this.updateId ==null) {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,50 +179,45 @@ public class ShapeSaveActivity extends AppCompatActivity {
             });
         }
 
-        if (this.updateId != 0) {
+        if (this.updateId != null) {
 
-            double bustFeats= Math.round(this.bustSize/12);
+            int bustFeats= ((Double)Math.floor(this.bustSize/12)).intValue();
             EditText bustMainInput = findViewById(R.id.bustMainInput);
             bustMainInput.setText(String.valueOf(bustFeats));
 
-            double bustInches = this.hipSize - (bustFeats*12);
+            int bustInches = this.bustSize - (bustFeats*12);
             EditText bustSubInput = findViewById(R.id.bustSubInput);
             bustSubInput.setText(String.valueOf(bustInches));
 
-            double waistFeats= Math.round(this.waistSize/12);
+            int waistFeats= ((Double)Math.floor(this.waistSize/12)).intValue();
             EditText waistMainInput = findViewById(R.id.waistMainInput);
             waistMainInput.setText(String.valueOf(waistFeats));
 
-            double waistInches = this.hipSize - (waistFeats*12);
+            int waistInches = this.waistSize - (waistFeats*12);
             EditText waistSubInput = findViewById(R.id.waistSubInput);
             waistSubInput.setText(String.valueOf(waistInches));
 
-            double hipFeats= Math.round(this.hipSize/12);
+            int hipFeats= ((Double)Math.floor(this.hipSize/12)).intValue();
             EditText hipMainInput = findViewById(R.id.hipMainInput);
             hipMainInput.setText(String.valueOf(hipFeats));
 
-            double hipInches = this.hipSize - (hipFeats*12);
+            int hipInches = this.hipSize - (hipFeats*12);
             EditText hipSubInput = findViewById(R.id.hipSubInput);
             hipSubInput.setText(String.valueOf(hipInches));
 
-            double highHipFeats= Math.round(this.highHipSize/12);
+            int highHipFeats= ((Double)Math.floor(this.highHipSize/12)).intValue();
             EditText highHipMainInput = findViewById(R.id.highHipMainInput);
             highHipMainInput.setText(String.valueOf(highHipFeats));
 
-            double highHipInches = this.hipSize - (highHipFeats*12);
+            int highHipInches = this.highHipSize - (highHipFeats*12);
             EditText highHipSubInput = findViewById(R.id.highHipSubInput);
             highHipSubInput.setText(String.valueOf(highHipInches));
-
-            hipSubInput.notify();
-
 
             setTitle("Update Shape");
         } else {
 
             setTitle("Today Shape");
         }
-
-
     }
 
     @Override
@@ -270,7 +251,6 @@ public class ShapeSaveActivity extends AppCompatActivity {
     public void goToList() {
 
         Intent intent = new Intent(this, ShapeListActivity.class);
-        finish();
         startActivity(intent);
     }
 }
