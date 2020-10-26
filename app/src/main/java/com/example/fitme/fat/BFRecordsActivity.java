@@ -12,19 +12,27 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitme.R;
 import com.example.fitme.fat.BFPastRecord;
+import com.example.fitme.shape.Shape;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class BFRecordsActivity extends AppCompatActivity {
 
@@ -43,11 +51,24 @@ public class BFRecordsActivity extends AppCompatActivity {
 
             final BFRecordsAdapter parent = this;
 
+            ref.addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            parent.refreshData(dataSnapshot);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            //handle databaseError
+                        }
+                    });
+
+
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    BFPastRecord pastRecord = dataSnapshot.getValue(BFPastRecord.class);
-                    parent.items.add(pastRecord);
+                    parent.refreshData(dataSnapshot);
                 }
 
                 @Override
@@ -55,6 +76,7 @@ public class BFRecordsActivity extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
+
             
             this.superCtx = ctx;
         }
@@ -105,8 +127,6 @@ public class BFRecordsActivity extends AppCompatActivity {
             TextView dateTextView = convertView.findViewById(R.id.dateText);
             dateTextView.setText(String.valueOf(item.getDate()));
 
-
-
             final BFRecordsAdapter adptr = this;
             Button deleteBtn = convertView.findViewById(R.id.bmiDeleteButton);
 
@@ -123,11 +143,9 @@ public class BFRecordsActivity extends AppCompatActivity {
                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference("bodyFats");
 
-                            DatabaseReference bodyFatRef = ref.child( String.valueOf(position));
+                            BFPastRecord item = adptr.items.get(position);
+                            DatabaseReference bodyFatRef = ref.child( item.firebaseId());
                             bodyFatRef.removeValue();
-
-                            adptr.items.remove(position);
-                            adptr.notifyDataSetInvalidated();
                             confirm.hide();
                         }
                     });
@@ -149,12 +167,61 @@ public class BFRecordsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent =  new Intent(adptr.superCtx, BFCalculatorActivity.class);
-                    intent.putExtra("UPDATE_ID", position+1);
+                    BFPastRecord bfPastRecord = adptr.items.get(position);
+                    intent.putExtra("UPDATE_ID", bfPastRecord.firebaseId());
+                    intent.putExtra("SEX", bfPastRecord.getSex());
+                    intent.putExtra("AGE", String.valueOf(bfPastRecord.getAge()));
+                    intent.putExtra("HEIGHT", String.valueOf(bfPastRecord.getHeight()));
+                    intent.putExtra("NECK", String.valueOf(bfPastRecord.getNeck()));
+                    intent.putExtra("WAIST", String.valueOf(bfPastRecord.getWaist()));
+                    intent.putExtra("HIP", String.valueOf(bfPastRecord.getHip()));
+                    intent.putExtra("WEIGHT", String.valueOf(bfPastRecord.getWeight()));
+
                     startActivity(intent);
                 }
             });
 
             return convertView;
+        }
+
+
+        protected void refreshData(DataSnapshot snapshot){
+            this.items.clear();
+            //Get map of users in datasnapshot
+            HashMap<String, HashMap<String, Object>> bfs  = (HashMap<String,HashMap<String, Object>>) snapshot.getValue();
+
+            if(bfs==null){
+                Toast.makeText(this.superCtx,"No data found. Please add some data",Toast.LENGTH_LONG);
+                finish();
+                return;
+            }
+
+            Iterator entrySet = bfs.entrySet().iterator();
+            while(entrySet.hasNext()){
+                Map.Entry entry = (Map.Entry) entrySet.next();
+                HashMap<String, Object> bfData = (HashMap<String, Object>) entry.getValue();
+
+                Long time = (Long) bfData.get("time");
+                Date date = new Date(time);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM");
+
+                BFPastRecord bf = new BFPastRecord(
+                        (String)entry.getKey(),
+                        Double.parseDouble(String.valueOf(bfData.get("height"))),
+                        ((Long) bfData.get("age")).intValue(),
+                        Double.parseDouble(String.valueOf( bfData.get("neck"))),
+                        Double.parseDouble(String.valueOf( bfData.get("waist"))),
+                        Double.parseDouble(String.valueOf( bfData.get("hip"))),
+                        Double.parseDouble(String.valueOf( bfData.get("weight"))),
+                        (String) bfData.get("sex"),
+                        dateFormat.format(date)
+                );
+
+                this.items.add(bf);
+            }
+
+            notifyDataSetInvalidated();
+
         }
     }
 

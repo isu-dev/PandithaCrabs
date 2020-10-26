@@ -2,20 +2,33 @@ package com.example.fitme.shape;
 
 import com.example.fitme.R;
 
+import java.util.Date;
+
 public class Shape {
     private Double bust;
     private Double waist;
     private Double hip;
     private Double highHip;
+    private long time;
+    private String firebaseId;
     private int shape;
 
-    public Shape(){}
+    public Shape(){
+        this.time = new Date().getTime();
+    }
 
     Shape(Double bust, Double waist, Double hip, int shape) {
         this.bust = bust;
         this.waist = waist;
         this.hip = hip;
         this.shape = shape;
+        this.time = new Date().getTime();
+    }
+
+    public String firebaseId(){return this.firebaseId;}
+
+    public void firebaseId(String id){
+        this.firebaseId = id;
     }
 
     public Double getBustSize() {
@@ -48,6 +61,9 @@ public class Shape {
         this.highHip = highHip;
     }
 
+    public Long getTime(){
+        return this.time;
+    }
 
     public int calculate(){
 
@@ -72,5 +88,13 @@ public class Shape {
 
     public int getShape() {
         return this.shape;
+    }
+
+    public void setShape(int shape) {
+        this.shape = shape;
+    }
+
+    public void setTime(long time){
+        this.time = time;
     }
 }

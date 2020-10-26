@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fitme.DailyCalorieIntake.CalculateDailyCalorieIntake;
 import com.example.fitme.R;
+import com.example.fitme.fat.BFCalculatorActivity;
+import com.example.fitme.fat.BFMainActivity;
+import com.example.fitme.shape.ShapeSaveActivity;
 
 public class HomeFragment extends Fragment {
     private ImageView iv_body_fat_calculator,iv_daily_calorie_calculator;
@@ -40,14 +43,14 @@ public class HomeFragment extends Fragment {
         iv_body_fat_calculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"body fat calculator",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), BFMainActivity.class));
             }
         });
 
         iv_body_shape_calculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"body shape calculator",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ShapeSaveActivity.class));
             }
         });
 

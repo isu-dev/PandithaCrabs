@@ -1,5 +1,7 @@
 package com.example.fitme.fat;
 
+import java.util.Date;
+
 public class BFCalculator {
     protected BFGender gender;
     protected int age;
@@ -9,6 +11,11 @@ public class BFCalculator {
     protected double neck;
     protected double weight;
     protected double bodyFat;
+    protected long time;
+
+    public BFCalculator(){
+        this.time = new Date().getTime();
+    }
 
     public void setGender(BFGender gender){
         this.gender = gender;
@@ -55,6 +62,16 @@ public class BFCalculator {
     public double getWeight(){return this.weight;}
 
     public double getBodyFat(){return this.bodyFat;}
+
+    public long getTime(){return this.time;}
+
+    public String getSex(){
+        if(this.gender == BFGender.male){
+            return "Male";
+        } else {
+            return "Female";
+        }
+    }
 
 
     /**

@@ -9,8 +9,12 @@ public class BFPastRecord {
     private Double weight = 0.0;
     private String sex = "Male";
     private String date = "";
+    private String firebaseId;
+
+    public BFPastRecord(){}
 
     public BFPastRecord(
+            String firebaseId,
             Double height,
             Integer age,
             Double neck,
@@ -20,6 +24,7 @@ public class BFPastRecord {
             String sex,
             String date
     ) {
+        this.firebaseId = firebaseId;
         this.height = height;
         this.age = age;
         this.neck = neck;
@@ -61,5 +66,7 @@ public class BFPastRecord {
     public String getDate(){
         return this.date;
     }
+
+    public String firebaseId(){return this.firebaseId;}
 
 }

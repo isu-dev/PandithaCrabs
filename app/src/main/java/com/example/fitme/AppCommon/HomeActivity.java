@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.fitme.DailyCalorieIntake.MyCalorieRecords;
 import com.example.fitme.R;
+import com.example.fitme.fat.BFCalculatorActivity;
+import com.example.fitme.fat.BFMainActivity;
+import com.example.fitme.shape.ShapeSaveActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -111,13 +114,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(HomeActivity.this,"BMI records",Toast.LENGTH_LONG).show();
                 break;
             case R.id.fat_records:
-                Toast.makeText(HomeActivity.this,"Fat records",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), BFMainActivity.class));
                 break;
             case R.id.calorie_intake_records:
                 startActivity(new Intent(getApplicationContext(), MyCalorieRecords.class));
                 break;
             case R.id.body_shape_records:
-                Toast.makeText(HomeActivity.this,"Body shape",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), ShapeSaveActivity.class));
                 break;
             case R.id.settings:
 //                navigationView.setCheckedItem(R.id.SignOut);

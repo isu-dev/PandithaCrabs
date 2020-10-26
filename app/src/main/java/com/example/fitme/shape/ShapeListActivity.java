@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ShapeListActivity extends AppCompatActivity {
 
@@ -38,15 +41,28 @@ public class ShapeListActivity extends AppCompatActivity {
             super();
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference ref = database.getReference("bodyFats");
+            DatabaseReference ref = database.getReference("shapes");
 
             final ShapeListAdapter parent = this;
+
+            ref.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    parent.refreshData(dataSnapshot);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+            });
+
 
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Shape pastRecord = dataSnapshot.getValue(Shape.class);
-                    parent.items.add(pastRecord);
+                    parent.refreshData(dataSnapshot);
                 }
 
                 @Override
@@ -85,35 +101,35 @@ public class ShapeListActivity extends AppCompatActivity {
             Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), item.getShape());
             imgView.setImageBitmap(bitmapImage);
 
-            long bustFeat = Math.round(item.getBustSize()/12);
+            int bustFeat = ((Double)Math.floor(item.getBustSize()/12)).intValue();
             TextView bustMainText = convertView.findViewById(R.id.bustMainText);
             bustMainText.setText( String.valueOf(bustFeat));
 
-            double bustInch = item.getWaistSize() - (bustFeat*12);
+            int bustInch = item.getBustSize().intValue() - (bustFeat*12);
             TextView bustSubText = convertView.findViewById(R.id.bustSubText);
             bustSubText.setText( String.valueOf(bustInch));
 
-            long waistFeat = Math.round(item.getWaistSize()/ 12);
+            int waistFeat = ((Double)Math.floor(item.getWaistSize()/ 12)).intValue();
             TextView waistMainText = convertView.findViewById(R.id.waistMainText);
             waistMainText.setText( String.valueOf(Math.round(waistFeat)));
 
-            double waistInch = item.getWaistSize() - (waistFeat*12);
+            int waistInch = item.getWaistSize().intValue() - (waistFeat*12);
             TextView waistSubText = convertView.findViewById(R.id.waistSubText);
             waistSubText.setText( String.valueOf(waistInch));
 
-            long hipFeat = Math.round(item.getWaistSize()/ 12);
+            int hipFeat = ((Double)Math.floor(item.getHipSize()/ 12)).intValue();
             TextView hipMainText = convertView.findViewById(R.id.hipMainText);
             hipMainText.setText( String.valueOf(Math.round(hipFeat)));
 
-            double hipInch = item.getWaistSize() - (hipFeat*12);
+            int hipInch = item.getHipSize().intValue() - (hipFeat*12);
             TextView hipSubText = convertView.findViewById(R.id.hipSubText);
             hipSubText.setText( String.valueOf(hipInch));
 
-            long highHipFeat = Math.round(item.getWaistSize()/ 12);
+            int highHipFeat = ((Double) Math.floor(item.getHighHipSize()/ 12)).intValue();
             TextView highHipMainText = convertView.findViewById(R.id.highHipMainText);
             highHipMainText.setText( String.valueOf(Math.round(highHipFeat)));
 
-            double highHipInch = item.getWaistSize() - (highHipFeat*12);
+            int highHipInch = item.getHighHipSize().intValue() - (highHipFeat*12);
             TextView highHipSubText = convertView.findViewById(R.id.highHipSubText);
             highHipSubText.setText( String.valueOf(highHipInch));
 
@@ -128,13 +144,13 @@ public class ShapeListActivity extends AppCompatActivity {
                     confirm.setConfirmListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Shape toDelete = adptr.items.get(position);
                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference("shapes");
 
-                            DatabaseReference bodyFatRef = ref.child( String.valueOf(position));
+                            DatabaseReference bodyFatRef = ref.child( toDelete.firebaseId());
                             bodyFatRef.removeValue();
 
-                            ArrayList<Shape> items = new ArrayList<Shape>();
                             adptr.items.remove(position);
                             adptr.notifyDataSetInvalidated();
                             confirm.hide();
@@ -158,16 +174,49 @@ public class ShapeListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent =  new Intent(adptr.superCtx, ShapeSaveActivity.class);
-                    intent.putExtra("UPDATE_ID", position+1);
-                    intent.putExtra("BUST_SIZE", item.getBustSize());
-                    intent.putExtra("WAIST_SIZE", item.getWaistSize());
-                    intent.putExtra("HIP_SIZE", item.getHipSize());
-                    intent.putExtra("HIGH_HIP_SIZE", item.getHighHipSize());
+                    intent.putExtra("UPDATE_ID", item.firebaseId());
+                    intent.putExtra("BUST_SIZE", String.valueOf(item.getBustSize()));
+                    intent.putExtra("WAIST_SIZE", String.valueOf(item.getWaistSize()));
+                    intent.putExtra("HIP_SIZE", String.valueOf(item.getHipSize()));
+                    intent.putExtra("HIGH_HIP_SIZE", String.valueOf(item.getHighHipSize()));
                     startActivity(intent);
                 }
             });
 
             return convertView;
+        }
+
+
+
+        protected void refreshData(DataSnapshot snapshot){
+            this.items.clear();
+            //Get map of users in datasnapshot
+            HashMap<String,HashMap<String, Object>> shapes  = (HashMap<String,HashMap<String, Object>>) snapshot.getValue();
+
+            if(shapes==null){
+                Toast.makeText(this.superCtx,"No data found. Please add some data",Toast.LENGTH_LONG);
+                finish();
+                return;
+            }
+
+            Iterator entrySet = shapes.entrySet().iterator();
+            while(entrySet.hasNext()){
+                Map.Entry entry = (Map.Entry) entrySet.next();
+                HashMap<String, Object> shapeData = (HashMap<String, Object>) entry.getValue();
+                Shape shape = new Shape();
+                shape.setBustSize((Long)shapeData.get("bustSize"));
+                shape.setWaistSize((Long)shapeData.get("waistSize"));
+                shape.setHipSize((Long)shapeData.get("hipSize"));
+                shape.setHighHipSize((Long)shapeData.get("highHipSize"));
+                shape.setShape( ((Long)shapeData.get("shape")).intValue());
+                shape.setTime( (Long)shapeData.get("time"));
+                shape.firebaseId((String)entry.getKey());
+
+                this.items.add(shape);
+            }
+
+            notifyDataSetInvalidated();
+
         }
     }
 
@@ -178,9 +227,6 @@ public class ShapeListActivity extends AppCompatActivity {
 
         // Changing the title
         setTitle("Past Shape Records");
-
-        // Displaying the back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ListView listView = findViewById(R.id.shapeListView);
         listView.setAdapter(new ShapeListAdapter(this));
