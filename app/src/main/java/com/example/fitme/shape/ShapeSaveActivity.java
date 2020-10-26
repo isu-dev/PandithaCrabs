@@ -29,6 +29,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
     private Integer hipSize = 0;
     private Integer waistSize = 0;
     private Integer highHipSize = 0;
+    private Boolean validated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ShapeSaveActivity extends AppCompatActivity {
             EditText editText = findViewById(textBoxId);
             editText.addTextChangedListener(new TextWatcher() {
                 public void afterTextChanged(Editable s) {   //Convert the Text to String
-                    boolean validated = true;
+                    validated = true;
                     for (Integer inputId : textBoxIds) {
                         EditText editText = findViewById(inputId);
                         String valueStr = editText.getText().toString();
@@ -119,6 +120,26 @@ public class ShapeSaveActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(!validated){
+                    final ConfirmationToast confirm = new ConfirmationToast(ctx, "Please complete required fields.");
+                    confirm.show();
+                    confirm.setCancelListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            confirm.hide();
+
+                        }
+                    });
+
+                    confirm.setConfirmListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            confirm.hide();
+                        }
+                    });
+                    return;
+                }
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference("");

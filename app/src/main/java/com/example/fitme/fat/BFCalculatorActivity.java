@@ -19,10 +19,12 @@ import android.widget.RadioGroup;
 
 import com.example.fitme.MainActivity;
 import com.example.fitme.R;
+import com.example.fitme.shape.ConfirmationToast;
 
 public class BFCalculatorActivity extends AppCompatActivity {
 
     public BFCalculator calculator;
+    protected Boolean validated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class BFCalculatorActivity extends AppCompatActivity {
                 if(b) {
                     ctx.calculator.setGender(BFGender.male);
                 }
+                validate();
 
             }
         });
@@ -50,6 +53,7 @@ public class BFCalculatorActivity extends AppCompatActivity {
                 if(b) {
                     ctx.calculator.setGender(BFGender.female);
                 }
+                validate();
             }
         });
 
@@ -64,8 +68,9 @@ public class BFCalculatorActivity extends AppCompatActivity {
                     int ageInt = Integer.parseInt(age);
                     ctx.calculator.setAge(ageInt);
                 } catch (Exception e){
-
                 }
+
+                validate();
 
                 return false;
             }
@@ -85,6 +90,8 @@ public class BFCalculatorActivity extends AppCompatActivity {
 
                 }
 
+                validate();
+
                 return false;
             }
         });
@@ -103,6 +110,8 @@ public class BFCalculatorActivity extends AppCompatActivity {
 
                 }
 
+                validate();
+
                 return false;
             }
         });
@@ -119,6 +128,8 @@ public class BFCalculatorActivity extends AppCompatActivity {
                 } catch (Exception e){
 
                 }
+
+                validate();
 
                 return false;
             }
@@ -137,6 +148,8 @@ public class BFCalculatorActivity extends AppCompatActivity {
 
                 }
 
+                validate();
+
                 return false;
             }
         });
@@ -154,6 +167,8 @@ public class BFCalculatorActivity extends AppCompatActivity {
                 } catch (Exception e){
 
                 }
+
+                validate();
 
                 return false;
             }
@@ -193,6 +208,26 @@ public class BFCalculatorActivity extends AppCompatActivity {
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!validated){
+                    final BFCalculatorToast confirm = new BFCalculatorToast(ctx, "Please complete required fields.");
+                    confirm.show();
+                    confirm.setCancelListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            confirm.hide();
+
+                        }
+                    });
+
+                    confirm.setConfirmListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            confirm.hide();
+                        }
+                    });
+                    return;
+                }
+
                 ctx.calculator.setBodyFat(ctx.calculator.calculate());
 
                 Intent intent =  new Intent(ctx, BFResultActivity.class);
@@ -242,6 +277,27 @@ public class BFCalculatorActivity extends AppCompatActivity {
             default:
 
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void validate(){
+        final Integer[] textBoxIds = {R.id.ageInput, R.id.heightInput, R.id.neckInput, R.id.waistInput, R.id.hipInput, R.id.weightInput};
+        validated = true;
+        for (Integer inputId : textBoxIds) {
+            EditText editText = findViewById(inputId);
+            String valueStr = editText.getText().toString();
+            try {
+                Double value = Double.parseDouble(valueStr);
+            } catch (NumberFormatException e) {
+                validated = false;
+            }
+        }
+
+        RadioButton male = findViewById(R.id.radioButtonMale);
+        RadioButton female = findViewById(R.id.radioButtonFemale);
+
+        if(!male.isChecked()&&!female.isChecked()){
+            validated=false;
         }
     }
 }
